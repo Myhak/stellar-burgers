@@ -3,6 +3,12 @@ import reducer, {
   getIngredientsThunk
 } from './IngredientsSlice';
 
+const PREV_ERROR_MSG = 'Предыдущая ошибка';
+
+const INGREDIENTS_PENDING = getIngredientsThunk.pending.type;
+const INGREDIENTS_FULFILLED = getIngredientsThunk.fulfilled.type;
+const INGREDIENTS_REJECTED = getIngredientsThunk.rejected.type;
+
 const mockSauce = () => ({
   id: '3',
   _id: '3',
@@ -13,10 +19,11 @@ const mockSauce = () => ({
   carbohydrates: 37,
   calories: 300,
   price: 3000,
-  image: 'https://code.s3.yandex.net/react/code/sauce-04.png',
-  image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png',
-  image_large: 'https://code.s3.yandex.net/react/code/sauce-04-large.png'
+  image: 'https://code.s3.yandex.net/react/code/sauce-04.png  ',
+  image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png  ',
+  image_large: 'https://code.s3.yandex.net/react/code/sauce-04-large.png  '
 });
+
 const mockMain = () => ({
   id: '2',
   _id: '2',
@@ -27,18 +34,18 @@ const mockMain = () => ({
   carbohydrates: 27,
   calories: 200,
   price: 2000,
-  image: 'https://code.s3.yandex.net/react/code/meat-03.png',
-  image_mobile: 'https://code.s3.yandex.net/react/code/meat-03-mobile.png',
-  image_large: 'https://code.s3.yandex.net/react/code/meat-03-large.png'
+  image: 'https://code.s3.yandex.net/react/code/meat-03.png  ',
+  image_mobile: 'https://code.s3.yandex.net/react/code/meat-03-mobile.png  ',
+  image_large: 'https://code.s3.yandex.net/react/code/meat-03-large.png  '
 });
 
 describe('Вызов экшена Request', () => {
   test('isLoad имеет значение true, а старые ошибки сбрасываются', () => {
     const startState = {
       ...ingredientsInitialState,
-      ingredientsError: 'Предыдущая ошибка'
+      ingredientsError: PREV_ERROR_MSG
     };
-    const action = { type: getIngredientsThunk.pending.type };
+    const action = { type: INGREDIENTS_PENDING };
     const newState = reducer(startState, action);
 
     expect(newState.isLoad).toBe(true);
@@ -48,7 +55,7 @@ describe('Вызов экшена Request', () => {
 
 describe('Вызов экшена Success', () => {
   const action = {
-    type: getIngredientsThunk.fulfilled.type,
+    type: INGREDIENTS_FULFILLED,
     payload: [mockSauce(), mockMain()]
   };
 
@@ -74,7 +81,7 @@ describe('Вызов экшена Success', () => {
   test('Ошибки сбрасываются', () => {
     const errorState = {
       ...ingredientsInitialState,
-      ingredientsError: 'Предыдущая ошибка',
+      ingredientsError: PREV_ERROR_MSG,
       isLoad: true
     };
     const newState = reducer(errorState, action);
@@ -112,7 +119,7 @@ describe('Вызов экшена Failed', () => {
     isLoad: true
   };
   const action = {
-    type: getIngredientsThunk.rejected.type,
+    type: INGREDIENTS_REJECTED,
     error: { message: 'Ошибка загрузки' }
   };
 

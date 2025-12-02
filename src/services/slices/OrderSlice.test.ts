@@ -4,14 +4,24 @@ import reducer, {
   getOrderThunk
 } from './OrderSlice';
 
+const PREV_ERROR_MSG = 'Предыдущая ошибка';
+
+const ORDERS_PENDING = getOrdersThunk.pending.type;
+const ORDERS_FULFILLED = getOrdersThunk.fulfilled.type;
+const ORDERS_REJECTED = getOrdersThunk.rejected.type;
+
+const ORDER_PENDING = getOrderThunk.pending.type;
+const ORDER_FULFILLED = getOrderThunk.fulfilled.type;
+const ORDER_REJECTED = getOrderThunk.rejected.type;
+
 describe('Экшены для getOrdersThunk (получение списка заказов)', () => {
   describe('Вызов экшена Request', () => {
-    const action = { type: getOrdersThunk.pending.type };
+    const action = { type: ORDERS_PENDING };
 
     test('isLoad имеет значение true, а старые ошибки сбрасываются', () => {
       const startState = {
         ...orderInitialState,
-        orderError: 'Предыдущая ошибка'
+        orderError: PREV_ERROR_MSG
       };
       const newState = reducer(startState, action);
 
@@ -76,7 +86,7 @@ describe('Экшены для getOrdersThunk (получение списка з
       isLoad: true
     };
     const action = {
-      type: getOrdersThunk.fulfilled.type,
+      type: ORDERS_FULFILLED,
       payload: mockOrders
     };
 
@@ -98,7 +108,7 @@ describe('Экшены для getOrdersThunk (получение списка з
     test('orderError должен сбрасываться в null', () => {
       const errorState = {
         ...startState,
-        orderError: 'Предыдущая ошибка'
+        orderError: PREV_ERROR_MSG
       };
       const newState = reducer(errorState, action);
 
@@ -173,7 +183,7 @@ describe('Экшены для getOrdersThunk (получение списка з
       isLoad: true
     };
     const action = {
-      type: getOrdersThunk.rejected.type,
+      type: ORDERS_REJECTED,
       error: { message: 'Ошибка загрузки' }
     };
 
@@ -205,12 +215,12 @@ describe('Экшены для getOrdersThunk (получение списка з
 
 describe('Экшены для getOrderThunk (получение заказа)', () => {
   describe('Вызов экшена Request', () => {
-    const action = { type: getOrderThunk.pending.type };
+    const action = { type: ORDER_PENDING };
 
     test('isLoad имеет значение true, а старые ошибки сбрасываются', () => {
       const startState = {
         ...orderInitialState,
-        orderError: 'Предыдущая ошибка'
+        orderError: PREV_ERROR_MSG
       };
       const newState = reducer(startState, action);
 
@@ -268,7 +278,7 @@ describe('Экшены для getOrderThunk (получение заказа)', 
       isLoad: true
     };
     const action = {
-      type: getOrderThunk.fulfilled.type,
+      type: ORDER_FULFILLED,
       payload: mockOrder
     };
 
@@ -289,7 +299,7 @@ describe('Экшены для getOrderThunk (получение заказа)', 
     test('orderError должен сбрасываться в null', () => {
       const errorState = {
         ...startState,
-        orderError: 'Предыдущая ошибка'
+        orderError: PREV_ERROR_MSG
       };
       const newState = reducer(errorState, action);
 
@@ -362,7 +372,7 @@ describe('Экшены для getOrderThunk (получение заказа)', 
       isLoad: true
     };
     const action = {
-      type: getOrderThunk.rejected.type,
+      type: ORDER_REJECTED,
       error: { message: 'Ошибка загрузки' }
     };
 

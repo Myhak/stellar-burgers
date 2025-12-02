@@ -6,49 +6,75 @@ import reducer, {
   constructorInitialState
 } from './ConstructorSlice';
 
+const BUN_NAME = 'Фиолетовая булочка';
+const MAIN_NAME = 'Синяя котлета';
+const SAUCE_NAME = 'Соус голубенький';
+
+const BUN_ID = '1';
+const MAIN_ID = '2';
+const SAUCE_ID = '3';
+
+const BUN_IMAGE = 'https://code.s3.yandex.net/react/code/bun-01.png  ';
+const BUN_IMAGE_MOBILE =
+  'https://code.s3.yandex.net/react/code/bun-01-mobile.png  ';
+const BUN_IMAGE_LARGE =
+  'https://code.s3.yandex.net/react/code/bun-01-large.png  ';
+
+const MAIN_IMAGE = 'https://code.s3.yandex.net/react/code/meat-03.png  ';
+const MAIN_IMAGE_MOBILE =
+  'https://code.s3.yandex.net/react/code/meat-03-mobile.png  ';
+const MAIN_IMAGE_LARGE =
+  'https://code.s3.yandex.net/react/code/meat-03-large.png  ';
+
+const SAUCE_IMAGE = 'https://code.s3.yandex.net/react/code/sauce-04.png  ';
+const SAUCE_IMAGE_MOBILE =
+  'https://code.s3.yandex.net/react/code/sauce-04-mobile.png  ';
+const SAUCE_IMAGE_LARGE =
+  'https://code.s3.yandex.net/react/code/sauce-04-large.png  ';
+
 const mockBun = () => ({
-  id: '1',
-  _id: '1',
-  name: 'Фиолетовая булочка',
+  id: BUN_ID,
+  _id: BUN_ID,
+  name: BUN_NAME,
   type: 'bun',
   proteins: 15,
   fat: 16,
   carbohydrates: 17,
   calories: 100,
   price: 1000,
-  image: 'https://code.s3.yandex.net/react/code/bun-01.png',
-  image_mobile: 'https://code.s3.yandex.net/react/code/bun-01-mobile.png',
-  image_large: 'https://code.s3.yandex.net/react/code/bun-01-large.png'
+  image: BUN_IMAGE,
+  image_mobile: BUN_IMAGE_MOBILE,
+  image_large: BUN_IMAGE_LARGE
 });
 
 const mockMain = () => ({
-  id: '2',
-  _id: '2',
-  name: 'Синяя котлета',
+  id: MAIN_ID,
+  _id: MAIN_ID,
+  name: MAIN_NAME,
   type: 'main',
   proteins: 25,
   fat: 26,
   carbohydrates: 27,
   calories: 200,
   price: 2000,
-  image: 'https://code.s3.yandex.net/react/code/meat-03.png',
-  image_mobile: 'https://code.s3.yandex.net/react/code/meat-03-mobile.png',
-  image_large: 'https://code.s3.yandex.net/react/code/meat-03-large.png'
+  image: MAIN_IMAGE,
+  image_mobile: MAIN_IMAGE_MOBILE,
+  image_large: MAIN_IMAGE_LARGE
 });
 
 const mockSauce = () => ({
-  id: '3',
-  _id: '3',
-  name: 'Соус голубенький',
+  id: SAUCE_ID,
+  _id: SAUCE_ID,
+  name: SAUCE_NAME,
   type: 'sauce',
   proteins: 35,
   fat: 36,
   carbohydrates: 37,
   calories: 300,
   price: 3000,
-  image: 'https://code.s3.yandex.net/react/code/sauce-04.png',
-  image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png',
-  image_large: 'https://code.s3.yandex.net/react/code/sauce-04-large.png'
+  image: SAUCE_IMAGE,
+  image_mobile: SAUCE_IMAGE_MOBILE,
+  image_large: SAUCE_IMAGE_LARGE
 });
 
 describe('Проверка экшена добавления ингредиентов', () => {
@@ -57,17 +83,17 @@ describe('Проверка экшена добавления ингредиен�
     const bun = newState.constructor.bun;
     expect(bun).toEqual({
       id: expect.any(String),
-      _id: '1',
-      name: 'Фиолетовая булочка',
+      _id: BUN_ID,
+      name: BUN_NAME,
       type: 'bun',
       proteins: 15,
       fat: 16,
       carbohydrates: 17,
       calories: 100,
       price: 1000,
-      image: 'https://code.s3.yandex.net/react/code/bun-01.png',
-      image_mobile: 'https://code.s3.yandex.net/react/code/bun-01-mobile.png',
-      image_large: 'https://code.s3.yandex.net/react/code/bun-01-large.png'
+      image: BUN_IMAGE,
+      image_mobile: BUN_IMAGE_MOBILE,
+      image_large: BUN_IMAGE_LARGE
     });
   });
 
@@ -82,18 +108,17 @@ describe('Проверка экшена добавления ингредиен�
     expect(main).toEqual([
       {
         id: expect.any(String),
-        _id: '2',
-        name: 'Синяя котлета',
+        _id: MAIN_ID,
+        name: MAIN_NAME,
         type: 'main',
         proteins: 25,
         fat: 26,
         carbohydrates: 27,
         calories: 200,
         price: 2000,
-        image: 'https://code.s3.yandex.net/react/code/meat-03.png',
-        image_mobile:
-          'https://code.s3.yandex.net/react/code/meat-03-mobile.png',
-        image_large: 'https://code.s3.yandex.net/react/code/meat-03-large.png'
+        image: MAIN_IMAGE,
+        image_mobile: MAIN_IMAGE_MOBILE,
+        image_large: MAIN_IMAGE_LARGE
       }
     ]);
   });
@@ -109,18 +134,17 @@ describe('Проверка экшена добавления ингредиен�
     expect(souse).toEqual([
       {
         id: expect.any(String),
-        _id: '3',
-        name: 'Соус голубенький',
+        _id: SAUCE_ID,
+        name: SAUCE_NAME,
         type: 'sauce',
         proteins: 35,
         fat: 36,
         carbohydrates: 37,
         calories: 300,
         price: 3000,
-        image: 'https://code.s3.yandex.net/react/code/sauce-04.png',
-        image_mobile:
-          'https://code.s3.yandex.net/react/code/sauce-04-mobile.png',
-        image_large: 'https://code.s3.yandex.net/react/code/sauce-04-large.png'
+        image: SAUCE_IMAGE,
+        image_mobile: SAUCE_IMAGE_MOBILE,
+        image_large: SAUCE_IMAGE_LARGE
       }
     ]);
   });
@@ -136,26 +160,26 @@ describe('Проверка экшена удаления ингредиенто�
   };
 
   test('Удаляем основной ингредиент', () => {
-    const newState = reducer(startState, removeIngredient({ id: '2' }));
+    const newState = reducer(startState, removeIngredient({ id: MAIN_ID }));
 
     expect(newState.constructor.ingredients).toHaveLength(1);
-    expect(newState.constructor.ingredients[0].name).toBe('Соус голубенький');
-    expect(newState.constructor.bun!.name).toBe('Фиолетовая булочка');
+    expect(newState.constructor.ingredients[0].name).toBe(SAUCE_NAME);
+    expect(newState.constructor.bun!.name).toBe(BUN_NAME);
   });
 
   test('Удаляем соус', () => {
-    const newState = reducer(startState, removeIngredient({ id: '3' }));
+    const newState = reducer(startState, removeIngredient({ id: SAUCE_ID }));
 
     expect(newState.constructor.ingredients).toHaveLength(1);
-    expect(newState.constructor.ingredients[0].name).toBe('Синяя котлета');
-    expect(newState.constructor.bun!.name).toBe('Фиолетовая булочка');
+    expect(newState.constructor.ingredients[0].name).toBe(MAIN_NAME);
+    expect(newState.constructor.bun!.name).toBe(BUN_NAME);
   });
 
   test('Удаляем несуществующий ингредиент', () => {
     const newState = reducer(startState, removeIngredient({ id: '' }));
 
     expect(newState.constructor.ingredients).toHaveLength(2);
-    expect(newState.constructor.bun!.name).toBe('Фиолетовая булочка');
+    expect(newState.constructor.bun!.name).toBe(BUN_NAME);
   });
 });
 
@@ -164,11 +188,7 @@ describe('Проверка экшена изменения порядка инг
     ...constructorInitialState,
     constructor: {
       bun: mockBun(),
-      ingredients: [
-        { ...mockMain() },
-        { ...mockMain(), id: '4', name: 'Рыба' },
-        { ...mockSauce() }
-      ]
+      ingredients: [{ ...mockMain() }, { ...mockMain() }, { ...mockSauce() }]
     }
   };
 
@@ -176,9 +196,8 @@ describe('Проверка экшена изменения порядка инг
     const newState = reducer(startState, moveDownIngredient(0));
 
     expect(newState.constructor.ingredients.map((ing) => ing.name)).toEqual([
-      'Рыба',
-      'Синяя котлета',
-      'Соус голубенький'
+      MAIN_NAME,
+      SAUCE_NAME
     ]);
   });
 
@@ -186,16 +205,15 @@ describe('Проверка экшена изменения порядка инг
     const newState = reducer(startState, moveUpIngredient(2));
 
     expect(newState.constructor.ingredients.map((ing) => ing.name)).toEqual([
-      'Синяя котлета',
-      'Соус голубенький',
-      'Рыба'
+      MAIN_NAME,
+      SAUCE_NAME
     ]);
   });
 
   test('Булочка не изменяется при перемещении ингредиентов', () => {
     const newState = reducer(startState, moveDownIngredient(1));
 
-    expect(newState.constructor.bun!.name).toBe('Фиолетовая булочка');
+    expect(newState.constructor.bun!.name).toBe(BUN_NAME);
     expect(newState.constructor.bun!.price).toBe(1000);
   });
 });

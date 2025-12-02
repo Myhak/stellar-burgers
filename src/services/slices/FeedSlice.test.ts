@@ -1,11 +1,18 @@
 import reducer, { feedInitialState, getFeedsThunk } from './FeedSlice';
 
+const PREV_ERROR_MSG = 'Предыдущая ошибка';
+
+const FEEDS_PENDING = getFeedsThunk.pending.type;
+const FEEDS_FULFILLED = getFeedsThunk.fulfilled.type;
+const FEEDS_REJECTED = getFeedsThunk.rejected.type;
+
 describe('Вызов экшена Request', () => {
-  const action = { type: getFeedsThunk.pending.type };
+  const action = { type: FEEDS_PENDING };
+
   test('isLoad имеет значение true, а старые ошибки сбрасываются', () => {
     const startState = {
       ...feedInitialState,
-      feedError: 'Предыдущая ошибка'
+      feedError: PREV_ERROR_MSG
     };
     const newState = reducer(startState, action);
 
@@ -68,7 +75,7 @@ describe('Вызов экшена Success', () => {
     isLoad: true
   };
   const action = {
-    type: getFeedsThunk.fulfilled.type,
+    type: FEEDS_FULFILLED,
     payload: mockFeed
   };
 
@@ -92,7 +99,7 @@ describe('Вызов экшена Success', () => {
   test('feedError должен сбрасываться в null', () => {
     const errorState = {
       ...startState,
-      feedError: 'Предыдущая ошибка'
+      feedError: PREV_ERROR_MSG
     };
     const newState = reducer(errorState, action);
 
@@ -146,7 +153,7 @@ describe('Вызов экшена Failed', () => {
     isLoad: true
   };
   const action = {
-    type: getFeedsThunk.rejected.type,
+    type: FEEDS_REJECTED,
     error: { message: 'Ошибка загрузки' }
   };
 

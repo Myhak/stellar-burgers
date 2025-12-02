@@ -10,13 +10,33 @@ import reducer, {
   clearUserError
 } from './UserSlice';
 
+const PREV_ERROR_MSG = 'Предыдущая ошибка';
+
+const LOGIN_PENDING = loginUserThunk.pending.type;
+const LOGIN_FULFILLED = loginUserThunk.fulfilled.type;
+const LOGIN_REJECTED = loginUserThunk.rejected.type;
+
+const LOGOUT_PENDING = logoutUserThunk.pending.type;
+const LOGOUT_FULFILLED = logoutUserThunk.fulfilled.type;
+const LOGOUT_REJECTED = logoutUserThunk.rejected.type;
+
+const REGISTER_FULFILLED = registerUserThunk.fulfilled.type;
+
+const FORGOT_FULFILLED = forgotPasswordThunk.fulfilled.type;
+const RESET_FULFILLED = resetPasswordThunk.fulfilled.type;
+
+const UPDATE_FULFILLED = updateUserThunk.fulfilled.type;
+
+const GET_USER_FULFILLED = getUserThunk.fulfilled.type;
+const GET_USER_REJECTED = getUserThunk.rejected.type;
+
 describe('Экшены для loginUserThunk', () => {
   describe('Вызов экшена Request', () => {
     const startState = {
       ...userInitialState,
-      loginUserError: 'Предыдущая ошибка'
+      loginUserError: PREV_ERROR_MSG
     };
-    const action = { type: loginUserThunk.pending.type };
+    const action = { type: LOGIN_PENDING };
 
     test('isLoad меняет значение на true', () => {
       const newState = reducer(userInitialState, action);
@@ -45,7 +65,7 @@ describe('Экшены для loginUserThunk', () => {
       isLoad: true
     };
     const action = {
-      type: loginUserThunk.fulfilled.type,
+      type: LOGIN_FULFILLED,
       payload: mockUserData
     };
 
@@ -82,7 +102,7 @@ describe('Экшены для loginUserThunk', () => {
       isLoad: true
     };
     const action = {
-      type: loginUserThunk.rejected.type,
+      type: LOGIN_REJECTED,
       error: { message: 'Ошибка входа' }
     };
 
@@ -120,7 +140,7 @@ describe('Экшены для loginUserThunk', () => {
 describe('Экшены для logoutUserThunk', () => {
   describe('Вызов экшена Request', () => {
     test('isLoad меняет значение на true', () => {
-      const action = { type: logoutUserThunk.pending.type };
+      const action = { type: LOGOUT_PENDING };
       const newState = reducer(userInitialState, action);
 
       expect(newState.isLoad).toBe(true);
@@ -133,7 +153,7 @@ describe('Экшены для logoutUserThunk', () => {
       isLoad: true
     };
     const action = {
-      type: logoutUserThunk.fulfilled.type
+      type: LOGOUT_FULFILLED
     };
 
     test('isLoad меняет значение на false', () => {
@@ -157,7 +177,7 @@ describe('Экшены для logoutUserThunk', () => {
     test('loginUserError должен сбрасываться в null', () => {
       const stateError = {
         ...startState,
-        loginUserError: 'Предыдущая ошибка'
+        loginUserError: PREV_ERROR_MSG
       };
       const newState = reducer(stateError, action);
 
@@ -171,7 +191,7 @@ describe('Экшены для logoutUserThunk', () => {
       isLoad: true
     };
     const action = {
-      type: logoutUserThunk.rejected.type,
+      type: LOGOUT_REJECTED,
       error: { message: 'Ошибка выхода' }
     };
 
@@ -206,7 +226,7 @@ describe('Экшены для registerUserThunk', () => {
     };
 
     const action = {
-      type: registerUserThunk.fulfilled.type,
+      type: REGISTER_FULFILLED,
       payload: mockUser
     };
 
@@ -239,7 +259,7 @@ describe('Экшены для forgotPasswordThunk и resetPasswordThunk', () => 
       };
 
       const action = {
-        type: forgotPasswordThunk.fulfilled.type
+        type: FORGOT_FULFILLED
       };
       const newState = reducer(loadingState, action);
 
@@ -253,7 +273,7 @@ describe('Экшены для forgotPasswordThunk и resetPasswordThunk', () => 
       };
 
       const action = {
-        type: resetPasswordThunk.fulfilled.type
+        type: RESET_FULFILLED
       };
       const newState = reducer(loadingState, action);
 
@@ -263,12 +283,12 @@ describe('Экшены для forgotPasswordThunk и resetPasswordThunk', () => 
     test('loginUserError должен сбрасываться в null', () => {
       const stateWithError = {
         ...userInitialState,
-        loginUserError: 'Предыдущая ошибка',
+        loginUserError: PREV_ERROR_MSG,
         isLoad: true
       };
 
       const action = {
-        type: forgotPasswordThunk.fulfilled.type
+        type: FORGOT_FULFILLED
       };
       const newState = reducer(stateWithError, action);
 
@@ -293,7 +313,7 @@ describe('Экшены для updateUserThunk', () => {
       };
 
       const action = {
-        type: updateUserThunk.fulfilled.type,
+        type: UPDATE_FULFILLED,
         payload: mockUpdatedUser
       };
       const newState = reducer(loadingState, action);
@@ -308,7 +328,7 @@ describe('Экшены для updateUserThunk', () => {
       };
 
       const action = {
-        type: updateUserThunk.fulfilled.type,
+        type: UPDATE_FULFILLED,
         payload: mockUpdatedUser
       };
       const newState = reducer(stateWithUser, action);
@@ -323,7 +343,7 @@ describe('Экшены для updateUserThunk', () => {
       };
 
       const action = {
-        type: updateUserThunk.fulfilled.type,
+        type: UPDATE_FULFILLED,
         payload: mockUpdatedUser
       };
       const newState = reducer(stateWithAuth, action);
@@ -346,7 +366,7 @@ describe('Экшены для getUserThunk', () => {
       isLoad: true
     };
     const action = {
-      type: getUserThunk.fulfilled.type,
+      type: GET_USER_FULFILLED,
       payload: mockUserData
     };
     test('isLoad меняет значение на false', () => {
@@ -380,7 +400,7 @@ describe('Экшены для getUserThunk', () => {
       isAuth: true
     };
     const action = {
-      type: getUserThunk.rejected.type,
+      type: GET_USER_REJECTED,
       error: { message: 'Ошибка получения пользователя' }
     };
 
