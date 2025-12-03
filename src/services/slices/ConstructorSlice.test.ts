@@ -197,6 +197,7 @@ describe('Проверка экшена изменения порядка инг
 
     expect(newState.constructor.ingredients.map((ing) => ing.name)).toEqual([
       MAIN_NAME,
+      MAIN_NAME,
       SAUCE_NAME
     ]);
   });
@@ -206,7 +207,8 @@ describe('Проверка экшена изменения порядка инг
 
     expect(newState.constructor.ingredients.map((ing) => ing.name)).toEqual([
       MAIN_NAME,
-      SAUCE_NAME
+      SAUCE_NAME,
+      MAIN_NAME
     ]);
   });
 
